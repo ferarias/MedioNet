@@ -1,0 +1,38 @@
+-v
+-r
+-d
+D:\photo\%Y/%Y%m%d/%Y%m%d_%H%M%S%%c.%%e
+-filename<filemodifydate
+-filename<createdate
+-filename<datetimeoriginal
+D:\photo\upload\2021_02_23 13_21 Office Lens.jpg
+-execute
+-v
+-r
+-d
+D:\photo\%Y/%Y%m%d/%Y%m%d_%H%M%S%%c.%%e
+-filename<filemodifydate
+-filename<createdate
+-filename<datetimeoriginal
+D:\photo\upload\2021_02_23 13_22 Office Lens.jpg
+-execute
+-v
+-r
+-d
+D:\photo\%Y/%Y%m%d/%Y%m%d_%H%M%S%%c.%%e
+-filename<filemodifydate
+-filename<createdate
+-filename<datetimeoriginal
+D:\photo\upload\2021_04_03 21_21 Office Lens (1).jpg
+-execute
+-v
+-r
+-d
+D:\photo\%Y/%Y%m%d/%Y%m%d_%H%M%S%%c.%%e
+-filename<filemodifydate
+-filename<createdate
+-filename<datetimeoriginal
+D:\photo\upload\2021_04_03 21_21 Office Lens (2).jpg
+-execute
+-stay_open
+false
