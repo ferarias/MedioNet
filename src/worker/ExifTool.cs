@@ -26,7 +26,7 @@ namespace MedioNet.Worker
             _options = optionsMonitor.CurrentValue;
 
             if (!Directory.Exists(_options.ExifToolFolderPath))
-                throw new DirectoryNotFoundException(_options.ExifToolFolderPath);
+                throw new DirectoryNotFoundException($"ExifTool folder path not found: '{_options.ExifToolFolderPath}'");
             _toolsPath = _options.ExifToolFolderPath;
 
             var exifToolExe = Path.Combine(_options.ExifToolFolderPath, "exiftool.exe");
