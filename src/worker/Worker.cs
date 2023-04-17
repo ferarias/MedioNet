@@ -12,7 +12,7 @@ namespace MedioNet.Worker
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        private MedioOptions _options;
+        private readonly MedioOptions _options;
 
         private readonly IExifTool _exifTool;
 
@@ -28,6 +28,15 @@ namespace MedioNet.Worker
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
+            if(!Directory.Exists(_options.SourcePath))
+            {
+                throw new DirectoryNotFoundException($"Source folder does not exist {_options.SourcePath}");
+            }
+            if(!Directory.Exists(_options.TargetPath))
+            {
+                throw new DirectoryNotFoundException($"Target folder does not exist {_options.TargetPath}");
+            }
+
             while (!stoppingToken.IsCancellationRequested)
             {
                 _logger.LogTrace("Worker running at: {time}", DateTimeOffset.Now);
