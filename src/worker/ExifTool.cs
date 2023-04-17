@@ -25,15 +25,16 @@ namespace MedioNet.Worker
         {
             _options = optionsMonitor.CurrentValue;
 
-            if (!Directory.Exists(_options.ExifToolFolderPath))
-                throw new DirectoryNotFoundException($"ExifTool folder path not found: '{_options.ExifToolFolderPath}'");
-            _toolsPath = _options.ExifToolFolderPath;
+            if (!File.Exists(_options.ExifToolPath))
+            {
+                throw new FileNotFoundException(_options.ExifToolPath);
+            }
+            var exifToolExe = _options.ExifToolPath;
 
-            var exifToolExe = Path.Combine(_options.ExifToolFolderPath, "exiftool.exe");
-            if (!File.Exists(exifToolExe))
-                throw new FileNotFoundException(_options.ExifToolFolderPath);
+            var fi = new FileInfo(exifToolExe);
+            _toolsPath = fi.Directory.FullName;
 
-            var exifToolArgsFile = Path.Combine(_options.ExifToolFolderPath, "args.txt");
+            var exifToolArgsFile = Path.Combine(_toolsPath, "args.txt");
 
             // Clear args file
             File.Create(exifToolArgsFile).Dispose();

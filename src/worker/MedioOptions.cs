@@ -4,7 +4,7 @@ namespace MedioNet.Worker
 {
     public class MedioOptions
     {
-        public string ExifToolFolderPath { get; set; }
+        public string ExifToolPath { get; set; }
 
         public string SourcePath { get; set; }
 
