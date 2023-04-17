@@ -28,11 +28,11 @@ namespace MedioNet.Worker
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            if(!Directory.Exists(_options.SourcePath))
+            if (!Directory.Exists(_options.SourcePath))
             {
                 throw new DirectoryNotFoundException($"Source folder does not exist {_options.SourcePath}");
             }
-            if(!Directory.Exists(_options.TargetPath))
+            if (!Directory.Exists(_options.TargetPath))
             {
                 throw new DirectoryNotFoundException($"Target folder does not exist {_options.TargetPath}");
             }
