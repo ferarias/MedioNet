@@ -10,8 +10,6 @@ namespace MedioNet.Worker
 
         public string FormatPattern { get; set; }
 
-        public string LogDir { get; set; }
-
         public List<string> AcceptedExtensions { get; set; } = new List<string>();
 
     }

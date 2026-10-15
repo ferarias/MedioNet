@@ -32,7 +32,6 @@ All behavior is driven by the `Medio` section of `src/worker/appsettings.json` (
 - `SourcePath` — root folder scanned each cycle, recursively (all subdirectories at any depth via `SearchOption.AllDirectories`). Can be overridden from the command line with `--source`/`-s` (mapped onto `Medio:SourcePath` in `Program.cs`, added last so it wins over `appsettings*.json` and env vars).
 - `TargetPath` + `FormatPattern` — combined into the destination path. `FormatPattern` is a native .NET `DateTime` format string (e.g. `yyyy/yyyyMMdd/yyyyMMdd_HHmmss`) applied to the resolved capture date; the original extension and a collision copy-suffix (`_1`, `_2`, …) are appended by code, not by the pattern.
 - `AcceptedExtensions` — lowercase extension allowlist; only matching files are processed.
-- `LogDir` — present in `MedioOptions`/`appsettings.json` but currently unread by any code (logging goes through the default `ILogger` console/debug providers only).
 
 ## Architecture
 
