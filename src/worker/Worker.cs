@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading;
@@ -14,16 +15,16 @@ namespace MedioNet.Worker
         private readonly ILogger<Worker> _logger;
         private MedioOptions _options;
 
-        private readonly IExifTool _exifTool;
+        private readonly IMediaOrganizer _mediaOrganizer;
 
         public Worker(
             IOptionsMonitor<MedioOptions> optionsMonitor,
-            IExifTool exifTool,
+            IMediaOrganizer mediaOrganizer,
             ILogger<Worker> logger)
         {
             _logger = logger;
             _options = optionsMonitor.CurrentValue;
-            _exifTool = exifTool;
+            _mediaOrganizer = mediaOrganizer;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -33,14 +34,21 @@ namespace MedioNet.Worker
                 _logger.LogTrace("Worker running at: {time}", DateTimeOffset.Now);
 
                 var files = Directory
-                    .GetFiles(_options.SourcePath)
+                    .EnumerateFiles(_options.SourcePath, "*", SearchOption.AllDirectories)
                     .Where(file => _options.AcceptedExtensions.Any(file.ToLower().EndsWith))
                     .ToList();
 
                 foreach (string file in files)
                 {
                     _logger.LogInformation("Processing {0}", file);
-                    _exifTool.Run(file);
+                    try
+                    {
+                        _mediaOrganizer.Run(file);
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError(ex, "Failed to process {File}", file);
+                    }
                 }
 
                 await Task.Delay(1000, stoppingToken).ConfigureAwait(false);
